@@ -23,6 +23,7 @@ function Search() {
       <div className="inputs">
         <Link to="/">Go Back to Home</Link>
         <input
+          style={{ width: "30%", textAlign: "center" }}
           type="text"
           placeholder="Enter Country Code (ex. BR)..."
           onChange={(event) => {
@@ -33,7 +34,7 @@ function Search() {
           onClick={() => {
             countrySearch({
               variables: { code: searchCountry.toUpperCase() },
-              pollInterval: 500, // to sync after some time i.e. 500ms
+              // pollInterval: 500, // to sync after some time i.e. 500ms
             });
           }}
         >
@@ -44,7 +45,8 @@ function Search() {
       <div className="searchCountry">
         {error && <h1>Error While Fetching Data</h1>}
         {loading && <h1>Data is Loading...</h1>}
-        {data && (
+        {console.log(data)};
+        {data && data.country !== null && (
           <div className="countryDisplay">
             <h1>Name: {data.country.name}</h1>
             <h1>Emoji: {data.country.emoji}</h1>
