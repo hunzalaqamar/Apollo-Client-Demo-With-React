@@ -1,5 +1,6 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
+import { Link } from "react-router-dom";
 
 const QUERY_LIST_OF_COUNTRIES = gql`
   {
@@ -7,6 +8,7 @@ const QUERY_LIST_OF_COUNTRIES = gql`
       name
       capital
       emoji
+      code
     }
   }
 `;
@@ -15,18 +17,23 @@ function Home() {
 
   return (
     <div className="home">
-      <h1>List of Countries</h1>
+      <div className="title">
+        <h1>List of Countries</h1>
+        <Link to="/search">Search For Country</Link>
+      </div>
       <div className="listOfCountries">
         {loading && <h3>Data is Loading....</h3>}
         {error && <h3>{error.message}</h3>}
         {data &&
           data.countries.map((country, key) => {
             return (
-              <div key={key}>
+              <div key={key} className="country">
                 <h2>
                   {country.name} {country.emoji}
                 </h2>
-                <h4>{country.capital}</h4>
+                <h4>
+                  {country.capital} | {country.code}
+                </h4>
               </div>
             );
           })}
