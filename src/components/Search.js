@@ -31,7 +31,10 @@ function Search() {
         />
         <button
           onClick={() => {
-            countrySearch({ variables: { code: searchCountry.toUpperCase() } });
+            countrySearch({
+              variables: { code: searchCountry.toUpperCase() },
+              pollInterval: 500, // to sync after some time i.e. 500ms
+            });
           }}
         >
           Search it!
